@@ -30,9 +30,6 @@ public class BulkDeleter implements IBulkDeleter {
                 } else {
                     logger.error("An error occurred: ", e);
                 }
-            } catch (InterruptedException e) {
-                logger.error("Thread interrupted: ", e);
-                Thread.currentThread().interrupt();
             }
         }
         logger.info("{} statuses were deleted.", deletedCount);

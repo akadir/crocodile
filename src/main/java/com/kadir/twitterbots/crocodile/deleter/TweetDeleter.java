@@ -21,7 +21,7 @@ public class TweetDeleter implements IDeleter {
     }
 
     @Override
-    public boolean delete(Long id) throws TwitterException, InterruptedException {
+    public boolean delete(Long id) throws TwitterException {
         Status status = twitter.showStatus(id);
         String statusTextLineBreaksRemoved = status.getText().replaceAll("\\r\\n|\\r|\\n", " ");
         String statusLink = "https://twitter.com/" + status.getUser().getScreenName() + "/status/" + status.getId();
@@ -36,17 +36,17 @@ public class TweetDeleter implements IDeleter {
         return deleted;
     }
 
-    private boolean delete(Status status) throws TwitterException, InterruptedException {
+    private boolean delete(Status status) throws TwitterException {
         if (status.getQuotedStatusId() != -1 && status.getQuotedStatus() == null) {
             logger.info("quoted tweet not found, tweet will be deleted");
             twitter.destroyStatus(status.getId());
             RateLimitHandler.handle(twitter.getId(), status.getRateLimitStatus(), ApiProcessType.DESTROY_STATUS);
             return true;
-        } else if(status.isRetweet() && status.getRetweetedStatus().getUser().getId() != twitter.getId()){
+        } else if (status.isRetweet() && status.getRetweetedStatus().getUser().getId() != twitter.getId()) {
             logger.info("retweet found");
             twitter.destroyStatus(status.getId());
             return true;
-        }else {
+        } else {
             if (FilterManager.filterStatus(status)) {
                 twitter.destroyStatus(status.getId());
                 RateLimitHandler.handle(twitter.getId(), status.getRateLimitStatus(), ApiProcessType.DESTROY_STATUS);
