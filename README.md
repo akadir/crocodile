@@ -1,6 +1,15 @@
 # Crocodile
 
-Removes tweets.
+[![gradle-version](https://img.shields.io/badge/gradle-5.5.1-brightgreen)](https://img.shields.io/badge/gradle-5.5.1-brightgreen)
+
+Deletes tweets using their status id's given in file. 
+
+### Usage
+clone project and set required properties in crocodile.properties file, and then execute: 
+
+```groovy
+gradle run
+```
 
 #### crocodile.properties
 
@@ -18,4 +27,15 @@ consumer-key =
 consumer-secret =
 access-token = 
 access-token-secret =
+```
+
+
+#### example status-id-file
+
+```text
+1
+2
+3
+4
+5
 ```
