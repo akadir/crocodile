@@ -1,5 +1,6 @@
 # Crocodile
 
+[![Build Status](https://travis-ci.org/akadir/crocodile.svg?branch=master)](https://travis-ci.org/akadir/crocodile)
 [![gradle-version](https://img.shields.io/badge/gradle-5.5.1-brightgreen)](https://img.shields.io/badge/gradle-5.5.1-brightgreen)
 
 Deletes tweets using their status id's given in file. 
